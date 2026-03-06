@@ -1,6 +1,11 @@
-Лабораторная работа №4 — Современные средства разработки веб-приложений (React)
+Лабораторная работа №8 — Современные средства разработки веб-приложений (React)
 
 Ссылка на репозиторий GitHub:
-https://github.com/Joshua1337-baboon/ssrvp-lab4-react-advanced
+https://github.com/Joshua1337130303/ssrvp-lab8-react-table
 
-Технологии: Vite + React + MUI v6 + React Router v7 + Redux Toolkit
+Технологии: Vite + React + MUI v7 + React Router v7 + Redux Toolkit +
+@tanstack/react-table v8 + @tanstack/react-virtual v3 + @dnd-kit
+
+Демо-доступ:
+  Администратор: логин admin   / пароль admin
+  Пользователь:  логин user1  / пароль user1
