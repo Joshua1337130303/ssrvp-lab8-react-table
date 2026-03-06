@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getFeedback, createFeedback, deleteFeedback } from '../api/api';
+import { getFeedback, createFeedback, deleteFeedback, patchFeedback } from '../api/api';
 
 /* ─────────────────────────── Async Thunks ── */
 
@@ -21,6 +21,21 @@ export const addFeedback = createAsyncThunk(
   async (review, { rejectWithValue }) => {
     try {
       return await createFeedback(review);
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
+
+/** PATCH /feedback/:id — обновить имя автора во всех его отзывах */
+export const updateFeedbackAuthorName = createAsyncThunk(
+  'feedback/updateAuthorName',
+  async ({ oldName, newName }, { rejectWithValue }) => {
+    try {
+      const items = await getFeedback();
+      const toUpdate = items.filter((r) => r.name === oldName);
+      await Promise.all(toUpdate.map((r) => patchFeedback(r.id, { name: newName })));
+      return { oldName, newName };
     } catch (err) {
       return rejectWithValue(err.message);
     }
@@ -79,6 +94,15 @@ const feedbackSlice = createSlice({
       .addCase(addFeedback.rejected, (state, action) => {
         state.loading = false;
         state.error   = action.payload;
+      });
+
+    /* updateFeedbackAuthorName */
+    builder
+      .addCase(updateFeedbackAuthorName.fulfilled, (state, action) => {
+        const { oldName, newName } = action.payload;
+        state.items = state.items.map((r) =>
+          r.name === oldName ? { ...r, name: newName } : r
+        );
       });
 
     /* removeFeedback */
