@@ -1,0 +1,70 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Администратор",
+      "login": "admin",
+      "password": "admin",
+      "email": "admin@lab8.ru",
+      "role": "admin",
+      "blocked": false
+    },
+    {
+      "id": 2,
+      "name": "Иван Петров",
+      "login": "user1",
+      "password": "user1",
+      "email": "ivan@lab8.ru",
+      "role": "user",
+      "blocked": false
+    },
+    {
+      "id": 3,
+      "name": "Мария Сидорова",
+      "login": "user2",
+      "password": "user2",
+      "email": "maria@lab8.ru",
+      "role": "user",
+      "blocked": false
+    },
+    {
+      "id": 4,
+      "name": "Дмитрий Козлов",
+      "login": "user3",
+      "password": "user3",
+      "email": "dmitry@lab8.ru",
+      "role": "user",
+      "blocked": true
+    }
+  ],
+  "feedback": [
+    {
+      "id": 1,
+      "name": "Алексей И.",
+      "rating": 5,
+      "text": "Отличный курс! Всё понятно объяснено, примеры кода очень наглядные.",
+      "date": "01.03.2026"
+    },
+    {
+      "id": 2,
+      "name": "Мария С.",
+      "rating": 4,
+      "text": "Лабораторные работы хорошо структурированы. Redux Toolkit — особенно понравился.",
+      "date": "02.03.2026"
+    },
+    {
+      "id": 3,
+      "name": "Дмитрий К.",
+      "rating": 5,
+      "text": "REST API, Redux и React — всё взаимосвязано, стало намного понятнее после lab6.",
+      "date": "05.03.2026"
+    },
+    {
+      "id": 4,
+      "name": "Иван Петров",
+      "rating": 4,
+      "text": "Хорошие задания, особенно понравилась работа с Redux Toolkit и async thunks.",
+      "date": "06.03.2026"
+    }
+  ]
+}
