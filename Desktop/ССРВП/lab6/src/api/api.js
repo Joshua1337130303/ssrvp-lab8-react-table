@@ -35,8 +35,12 @@ export const getUserByLogin = (login) =>
 export const createUser = (userData) =>
   api.post('/users', userData).then((r) => r.data);
 
-/** PUT /users/:id — обновить профиль пользователя */
+/** PATCH /users/:id — обновить профиль пользователя (частичное обновление) */
 export const updateUser = (id, userData) =>
-  api.put(`/users/${id}`, userData).then((r) => r.data);
+  api.patch(`/users/${id}`, userData).then((r) => r.data);
+
+/** PATCH /feedback/:id — обновить поле отзыва */
+export const patchFeedback = (id, data) =>
+  api.patch(`/feedback/${id}`, data).then((r) => r.data);
 
 export default api;

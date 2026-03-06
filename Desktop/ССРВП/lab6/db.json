@@ -2,10 +2,10 @@
   "users": [
     {
       "id": 1,
-      "name": "Администратор",
+      "name": "Администратор12345",
       "login": "admin",
-      "email": "admin@lab6.ru",
-      "password": "admin"
+      "password": "admin",
+      "email": "admin@lab6.ru"
     }
   ],
   "feedback": [
@@ -29,6 +29,13 @@
       "rating": 5,
       "text": "REST API, Redux и React — всё взаимосвязано, стало намного понятнее после lab6.",
       "date": "05.03.2026"
+    },
+    {
+      "name": "Администратор12345",
+      "rating": 5,
+      "text": "Hello!!!!!",
+      "date": "06.03.2026",
+      "id": 4
     }
   ]
 }

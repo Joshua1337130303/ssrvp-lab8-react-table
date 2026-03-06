@@ -9,8 +9,9 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SaveIcon          from '@mui/icons-material/Save';
 import EditIcon          from '@mui/icons-material/Edit';
 
-import { updateUserProfile, clearUsersStatus } from '../store/usersSlice';
-import { updateAuthUser }                       from '../store/authSlice';
+import { updateUserProfile, clearUsersStatus }    from '../store/usersSlice';
+import { updateAuthUser }                          from '../store/authSlice';
+import { updateFeedbackAuthorName }                from '../store/feedbackSlice';
 
 /* ─────────────────────────────────────── ProfilePage ── */
 function ProfilePage() {
@@ -42,12 +43,14 @@ function ProfilePage() {
     }
   }, [user, reset]);
 
-  /** PUT /users/:id — обновить профиль через Redux async thunk */
+  /** PATCH /users/:id — обновить профиль через Redux async thunk */
   const onSubmit = useCallback(async (data) => {
     if (!user?.id) return;
 
+    const oldName = user.name;
+
+    // Отправляем только изменённые поля — пароль остаётся нетронутым на сервере
     const updatedData = {
-      ...user,
       name:  data.name,
       email: data.email,
     };
@@ -56,6 +59,10 @@ function ProfilePage() {
     if (updateUserProfile.fulfilled.match(result)) {
       // Обновляем пользователя в auth store (и localStorage)
       dispatch(updateAuthUser({ name: data.name, email: data.email }));
+      // Если имя изменилось — обновляем имя автора во всех его отзывах
+      if (oldName !== data.name) {
+        dispatch(updateFeedbackAuthorName({ oldName, newName: data.name }));
+      }
     }
   }, [dispatch, user]);
 
