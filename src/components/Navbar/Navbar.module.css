@@ -1,0 +1,82 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1a1a2e;
+  padding: 0 28px;
+  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,.4);
+}
+
+.brand {
+  color: #61dafb;
+  font-size: 1.1rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.links a {
+  color: #cdd3dd;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.links a:hover      { background: rgba(255,255,255,.08); color: #fff; }
+.activeLink         { background: rgba(97,218,251,.15) !important; color: #61dafb !important; }
+
+/* Бургер (скрыт на десктопе) */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #cdd3dd;
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+.burger:hover span { background: #fff; }
+
+/* Мобильное меню */
+@media (max-width: 600px) {
+  .burger { display: flex; }
+
+  .links {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: #1a1a2e;
+    padding: 8px 0 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.3);
+  }
+
+  .links.open { display: flex; }
+
+  .links a { border-radius: 0; padding: 12px 28px; }
+}
