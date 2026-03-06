@@ -1,0 +1,306 @@
+/* MemoriesTimeline.css */
+.memories-timeline-section {
+  max-width: 600px;
+  margin: 32px auto;
+  background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(80, 120, 200, 0.08);
+  padding: 32px 20px 40px 20px;
+  position: relative;
+}
+
+.memories-timeline-section h2 {
+  text-align: center;
+  color: #6a5acd;
+  margin-bottom: 24px;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.memories-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+.memories-form input[type="text"],
+.memories-form input[type="date"],
+.memories-form textarea {
+  border: 1px solid #b3b3e6;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 1rem;
+  background: #f7f8fa;
+  outline: none;
+  transition: border 0.2s;
+  min-width: 0;
+  width: 220px;
+  box-sizing: border-box;
+}
+.memories-form textarea {
+  min-width: 180px;
+  min-height: 36px;
+  resize: vertical;
+}
+.memories-form input[type="file"] {
+  margin-top: 2px;
+}
+.memories-form button {
+  background: #6a5acd;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.memories-form button:hover {
+  background: #4b3ca7;
+}
+
+.memories-timeline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.memories-empty {
+  text-align: center;
+  color: #888;
+  margin: 32px 0;
+  font-size: 1.1rem;
+}
+
+.memories-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(106, 90, 205, 0.07);
+  padding: 18px 20px 16px 20px;
+  position: relative;
+  transition: box-shadow 0.2s;
+  cursor: pointer;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+  overflow: visible;
+  width: 100%;
+  box-sizing: border-box;
+}
+.memories-card:hover {
+  box-shadow: 0 6px 24px rgba(106, 90, 205, 0.13);
+}
+.memories-card-date {
+  color: #6a5acd;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  width: 100%;
+  box-sizing: border-box;
+}
+.memories-card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #333;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  width: 100%;
+  box-sizing: border-box;
+}
+.memories-card-desc {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 8px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  width: 100%;
+  box-sizing: border-box;
+}
+.memories-card-img {
+  display: block;
+  max-width: 100%;
+  max-height: 180px;
+  border-radius: 12px;
+  margin: 0 auto;
+  margin-top: 8px;
+  box-shadow: 0 2px 8px rgba(106, 90, 205, 0.08);
+  transition: transform 0.2s;
+  width: 100%;
+  height: auto;
+}
+.memories-card-img:hover {
+  transform: scale(1.04);
+}
+
+/* Модальное окно */
+.media-modal-overlay {
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(60, 60, 80, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.media-modal-content {
+  background: #fff;
+  border-radius: 20px;
+  padding: 24px 18px 18px 18px;
+  box-shadow: 0 8px 32px rgba(80, 80, 120, 0.18);
+  max-width: 96vw;
+  max-height: 90vh;
+  position: relative;
+  text-align: center;
+}
+.media-modal-close {
+  position: absolute;
+  top: 10px; right: 16px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #6a5acd;
+  cursor: pointer;
+  z-index: 2;
+}
+.memories-modal-img {
+  max-width: 90vw;
+  max-height: 60vh;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 12px rgba(106, 90, 205, 0.13);
+}
+.memories-modal-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: #333;
+}
+.memories-modal-date {
+  color: #6a5acd;
+  font-size: 0.98rem;
+  margin-bottom: 6px;
+}
+.memories-modal-desc {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 8px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .memories-timeline-section {
+    padding: 12px 2vw 24px 2vw;
+  }
+  .memories-form {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .memories-card {
+    padding: 12px 8px 12px 8px;
+  }
+  .memories-form input[type="text"],
+  .memories-form input[type="date"],
+  .memories-form textarea,
+  .memories-form button {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 480px) {
+  .memories-timeline-section {
+    padding: 10px 1vw 18px 1vw;
+    font-size: 1.15rem;
+  }
+  .memories-form input[type="text"],
+  .memories-form input[type="date"],
+  .memories-form textarea {
+    font-size: 1.15rem;
+    padding: 14px 14px;
+    height: 48px;
+  }
+  .memories-form button {
+    font-size: 1.15rem;
+    padding: 14px 0;
+    height: 48px;
+  }
+  .memories-card {
+    padding: 18px 8px 18px 8px;
+    font-size: 1.1rem;
+  }
+  .memories-card-title {
+    font-size: 1.3rem;
+  }
+  .memories-card-date {
+    font-size: 1.1rem;
+  }
+  .memories-card-desc {
+    font-size: 1.1rem;
+  }
+  .memories-card-img {
+    max-height: 220px;
+  }
+  .media-modal-content {
+    padding: 18px 6px 12px 6px;
+  }
+  .memories-modal-img {
+    max-width: 98vw;
+    max-height: 60vh;
+  }
+}
+
+@media (max-width: 430px) and (min-device-pixel-ratio: 3), (max-width: 430px) and (min-resolution: 3dppx) {
+  .memories-timeline-section {
+    font-size: 1.18rem;
+    padding: 8px 0.5vw 14px 0.5vw;
+  }
+  .memories-form input[type="text"],
+  .memories-form input[type="date"],
+  .memories-form textarea {
+    font-size: 1.18rem;
+    padding: 16px 16px;
+    height: 54px;
+  }
+  .memories-form button {
+    font-size: 1.18rem;
+    padding: 16px 0;
+    height: 54px;
+  }
+  .memories-card {
+    font-size: 1.15rem;
+    padding: 22px 4px 22px 4px;
+  }
+  .memories-card-title {
+    font-size: 1.35rem;
+  }
+  .memories-card-date {
+    font-size: 1.15rem;
+  }
+  .memories-card-desc {
+    font-size: 1.15rem;
+  }
+  .memories-card-img {
+    max-height: 250px;
+  }
+  .media-modal-content {
+    padding: 12px 2px 8px 2px;
+  }
+  .memories-modal-img {
+    max-width: 99vw;
+    max-height: 55vh;
+  }
+} 
