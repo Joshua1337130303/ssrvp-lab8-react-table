@@ -1,0 +1,6 @@
+Лабораторная работа №4 — Современные средства разработки веб-приложений (React)
+
+Ссылка на репозиторий GitHub:
+https://github.com/Joshua1337-baboon/ssrvp-lab4-react-advanced
+
+Технологии: Vite + React + MUI v6 + React Router v7 + Redux Toolkit
