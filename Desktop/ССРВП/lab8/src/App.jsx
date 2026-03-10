@@ -1,6 +1,6 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { Box, createTheme, ThemeProvider as MuiThemeProvider, CssBaseline } from '@mui/material';
+import { Box, createTheme, ThemeProvider as MuiThemeProvider, CssBaseline, CircularProgress } from '@mui/material';
 import { Provider as ReduxProvider } from 'react-redux';
 
 import { ThemeProvider, useTheme } from './context/ThemeContext';
@@ -11,19 +11,30 @@ import Footer     from './components/Footer';
 import Menu       from './components/Menu';
 import BottomNav  from './components/BottomNav';
 
-import MainPage          from './pages/MainPage';
-import AboutPage         from './pages/AboutPage';
-import LabPage           from './pages/LabPage';
-import UseStatePage      from './pages/UseStatePage';
-import UseEffectPage     from './pages/UseEffectPage';
-import ReduxPage         from './pages/ReduxPage';
-import FeedbackPage      from './pages/FeedbackPage';
-import ProfilePage       from './pages/ProfilePage';
-import AuthPage          from './pages/AuthPage';
-import AdminUsersPage    from './pages/admin/AdminUsersPage';
-import AdminFeedbackPage from './pages/admin/AdminFeedbackPage';
+/* ── Lazy-импорты страниц (code splitting / chunks) ── */
+const MainPage          = lazy(() => import('./pages/MainPage'));
+const AboutPage         = lazy(() => import('./pages/AboutPage'));
+const LabPage           = lazy(() => import('./pages/LabPage'));
+const UseStatePage      = lazy(() => import('./pages/UseStatePage'));
+const UseEffectPage     = lazy(() => import('./pages/UseEffectPage'));
+const ReduxPage         = lazy(() => import('./pages/ReduxPage'));
+const FeedbackPage      = lazy(() => import('./pages/FeedbackPage'));
+const ProfilePage       = lazy(() => import('./pages/ProfilePage'));
+const AuthPage          = lazy(() => import('./pages/AuthPage'));
+const PostsPage         = lazy(() => import('./pages/PostsPage'));
+const AdminUsersPage    = lazy(() => import('./pages/admin/AdminUsersPage'));
+const AdminFeedbackPage = lazy(() => import('./pages/admin/AdminFeedbackPage'));
 
 import { useLoginState, useIsAdmin } from './hooks/useLoginState';
+
+/* ── Fallback-компонент при загрузке чанка ── */
+function PageLoader() {
+  return (
+    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '40vh' }}>
+      <CircularProgress />
+    </Box>
+  );
+}
 
 /* ─────────────────────────── AdminGuard ── */
 /**
@@ -55,37 +66,40 @@ function MainApp() {
 
       {/* ── Content ── */}
       <Box component="main" sx={{ flex: 1, minWidth: 0, pb: { xs: 7, sm: 0 } }}>
-        <Routes>
-          {/* ── Пользовательские маршруты ── */}
-          <Route path="/"             element={<MainPage />} />
-          <Route path="/about"        element={<AboutPage />} />
-          <Route path="/lab/:id"      element={<LabPage />} />
-          <Route path="/hooks/state"  element={<UseStatePage />} />
-          <Route path="/hooks/effect" element={<UseEffectPage />} />
-          <Route path="/redux"        element={<ReduxPage />} />
-          <Route path="/feedback"     element={<FeedbackPage />} />
-          <Route path="/profile"      element={<ProfilePage />} />
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            {/* ── Пользовательские маршруты ── */}
+            <Route path="/"             element={<MainPage />} />
+            <Route path="/about"        element={<AboutPage />} />
+            <Route path="/lab/:id"      element={<LabPage />} />
+            <Route path="/hooks/state"  element={<UseStatePage />} />
+            <Route path="/hooks/effect" element={<UseEffectPage />} />
+            <Route path="/redux"        element={<ReduxPage />} />
+            <Route path="/feedback"     element={<FeedbackPage />} />
+            <Route path="/profile"      element={<ProfilePage />} />
+            <Route path="/posts"        element={<PostsPage />} />
 
-          {/* ── Маршруты администратора (AdminGuard) ── */}
-          <Route
-            path="/admin/users"
-            element={
-              <AdminGuard>
-                <AdminUsersPage />
-              </AdminGuard>
-            }
-          />
-          <Route
-            path="/admin/feedback"
-            element={
-              <AdminGuard>
-                <AdminFeedbackPage />
-              </AdminGuard>
-            }
-          />
+            {/* ── Маршруты администратора (AdminGuard) ── */}
+            <Route
+              path="/admin/users"
+              element={
+                <AdminGuard>
+                  <AdminUsersPage />
+                </AdminGuard>
+              }
+            />
+            <Route
+              path="/admin/feedback"
+              element={
+                <AdminGuard>
+                  <AdminFeedbackPage />
+                </AdminGuard>
+              }
+            />
 
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Suspense>
       </Box>
 
       {/* ── Footer (скрыт на мобильных — там BottomNav) ── */}
@@ -107,7 +121,13 @@ function MainApp() {
  */
 function AuthGuard() {
   const isAuthenticated = useLoginState();
-  return isAuthenticated ? <MainApp /> : <AuthPage />;
+  return isAuthenticated
+    ? <MainApp />
+    : (
+      <Suspense fallback={<PageLoader />}>
+        <AuthPage />
+      </Suspense>
+    );
 }
 
 /* ─────────────────────────── AppShell ── */

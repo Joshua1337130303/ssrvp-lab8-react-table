@@ -12,6 +12,7 @@ import ChevronLeftIcon        from '@mui/icons-material/ChevronLeft';
 import PeopleIcon             from '@mui/icons-material/People';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import ManageAccountsIcon     from '@mui/icons-material/ManageAccounts';
+import ArticleIcon            from '@mui/icons-material/Article';
 import { NavLink, useLocation } from 'react-router-dom';
 import { labs }      from '../../data/labs';
 import { useIsAdmin } from '../../hooks/useLoginState';
@@ -24,6 +25,7 @@ const DEMO_LINKS = [
   { to: '/redux',        label: 'Redux',             icon: <StorageIcon       sx={{ fontSize: 20 }} /> },
   { to: '/feedback',     label: 'Обратная связь',   icon: <FeedbackIcon      sx={{ fontSize: 20 }} /> },
   { to: '/profile',      label: 'Профиль (PATCH)',  icon: <AccountCircleIcon sx={{ fontSize: 20 }} /> },
+  { to: '/posts',        label: 'RTK Query (Posts)', icon: <ArticleIcon       sx={{ fontSize: 20 }} /> },
 ];
 
 const ADMIN_LINKS = [
