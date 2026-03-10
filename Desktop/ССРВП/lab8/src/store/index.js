@@ -4,6 +4,7 @@ import authReducer     from './authSlice';
 import feedbackReducer from './feedbackSlice';
 import usersReducer    from './usersSlice';
 import adminReducer    from './adminSlice';
+import { postsApi }   from '../api/postsApi';
 
 const store = configureStore({
   reducer: {
@@ -12,7 +13,10 @@ const store = configureStore({
     feedback: feedbackReducer,
     users:    usersReducer,
     admin:    adminReducer,
+    [postsApi.reducerPath]: postsApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(postsApi.middleware),
 });
 
 export default store;
